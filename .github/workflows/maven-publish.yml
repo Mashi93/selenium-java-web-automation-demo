@@ -47,6 +47,18 @@ jobs:
           echo "chrome version"
           google-chrome --version
 
+    - name: archive test report
+      if: always()
+      uses: actions/upload-artifact@v3
+      with: 
+        name: test-report
+        path: reports
+        
+  test:
+    runs-on: ubuntu-latest
+
+    steps: 
+
     - name: execute test
       run: mvn clean test -Pheadless-chrome,qa,smoke-test
 
@@ -56,4 +68,3 @@ jobs:
       with: 
         name: test-report
         path: reports
-        
